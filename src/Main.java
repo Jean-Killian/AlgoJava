@@ -1,9 +1,23 @@
+import java.util.Arrays;
+
 /**
  * @author killian
  * @version v69.420
  */
 
 public class Main {
+
+    public static int linearSort(int[] tabScore, int value) {
+        for (int i = 0; i < tabScore.length; i++) {
+            if (tabScore[i] == value) {
+                return i;
+
+            }
+
+        }
+    return -1;
+    }
+
 
     /**
      * Fonction return true si une des valeur du tableau est inférieur à 10
@@ -46,25 +60,26 @@ public class Main {
      */
     public static void printScore(int[]tabScore) {
         for (int i = 0; i < tabScore.length; i++) {
-            System.out.println(tabScore[i]);
+            System.out.println(i + 1 + " : " + tabScore[i]);
         }
     }
 
     public static void main(String[] args) {
         System.out.println("Hello world!");
         int score = 0;
-        int [] tabScore = new int [7];
+        int [] tabScore = new int [10000000];
 
         //Attribue une valeur random pour toutes les valeurs du tableau
         for (int i = 0; i < tabScore.length; i++) {
-            tabScore[i] = (int) Math.ceil(Math.random() * 100);
+            tabScore[i] = (int) Math.ceil(Math.random() * 100000000);
         }
+        Arrays.sort(tabScore);
 
         printScore(tabScore);
 
         //Calcul de la moyenne
         int somme = 0;
-        for (int i = 0; i < tabScore.length; i++) {
+        for (int i =0; i < tabScore.length; i++) {
             somme += tabScore[i];
         }
         int moyenne = 0;
@@ -74,5 +89,18 @@ public class Main {
 
         System.out.println("le plus grand score est : " + maxScore(tabScore));
         System.out.println("Valeur en dessou de 10 : " + isValueLow(tabScore));
+
+        int valueSearch = 666;
+        int valueSearchPlacement = 0;
+        valueSearchPlacement = linearSort(tabScore, valueSearch) + 1;
+
+        System.out.println("valeur recherché : " + valueSearch);
+
+        if (linearSort(tabScore, valueSearch) == -1) {
+            System.out.println("Erreur : la valeur recherché n'existe pas");
+        }
+        else {
+            System.out.println("placement de la valeur recherché : " + valueSearchPlacement);
+        }
     }
 }
